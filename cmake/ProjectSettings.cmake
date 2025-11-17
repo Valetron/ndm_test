@@ -1,0 +1,10 @@
+set(CMAKE_CXX_STANDARD 20)
+set(CXX_STANDARD_REQUIRED YES)
+
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    message(DEBUG "ccache found")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ${CCACHE_PROGRAM})
+endif()
+
+add_compile_definitions(SPDLOG_COMPILED_LIB SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
