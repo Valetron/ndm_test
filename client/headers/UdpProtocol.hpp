@@ -1,0 +1,4 @@
+#ifndef UDPPROTOCOL_HPP
+#define UDPPROTOCOL_HPP
+
+#endif // UDPPROTOCOL_HPP
