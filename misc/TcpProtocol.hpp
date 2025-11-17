@@ -3,9 +3,9 @@
 
 #include "ITransportProtocol.hpp"
 
-namespace ndm::client
+namespace ndm::utils
 {
 
-} // namespace ndm::client
+} // namespace ndm::utils
 
 #endif // TCPPROTOCOL_HPP
