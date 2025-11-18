@@ -8,6 +8,7 @@
 #include "Utils.hpp"
 
 namespace bpo = boost::program_options;
+using namespace ndm::utils;
 
 int main(int argc, char** argv)
 {
@@ -16,14 +17,14 @@ int main(int argc, char** argv)
     try
     {
         std::string protocol {};
-        std::string serverAddr {};
+        std::string serverAddrStr {};
         uint16_t serverPort {0};
 
         bpo::options_description desc("Allowed options");
         desc.add_options()
             ("help,h", "Print help message")
             ("protocol,p", bpo::value<std::string>(&protocol)->required(), "IP protocol: TCP or UDP")
-            ("address", bpo::value<std::string>(&serverAddr)->required(), "Server address")
+            ("address", bpo::value<std::string>(&serverAddrStr)->required(), "Server address")
             ("port", bpo::value<uint16_t>(&serverPort)->required(), "Server port")
             ("debug,d", bpo::bool_switch(), "Enable debug logs");
 
@@ -38,15 +39,10 @@ int main(int argc, char** argv)
 
         bpo::notify(vm);
 
-        if (vm.contains("address"))
-        {
-            // const auto r = ndm::client::ipStrToNum(serverAddr);
-        }
-
         if (vm.contains("debug"))
             spdlog::set_level(spdlog::level::debug);
 
-        SPDLOG_CRITICAL(serverAddr);
+        const auto serverAddr = ipStrToNum(serverAddrStr);
     }
     catch (const bpo::error& ex)
     {
