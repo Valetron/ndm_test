@@ -8,4 +8,4 @@ if(CCACHE_PROGRAM)
 endif()
 
 add_compile_definitions(SPDLOG_COMPILED_LIB SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-include_directories("${PROJECT_ROOT_DIR}/misc")
+include_directories("${PROJECT_ROOT_DIR}/misc/headers")

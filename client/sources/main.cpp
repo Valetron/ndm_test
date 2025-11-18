@@ -1,6 +1,7 @@
 #include <string>
 #include <cstdint>
 #include <iostream>
+#include <algorithm>
 
 #include <spdlog/spdlog.h>
 #include <boost/program_options.hpp>
@@ -43,10 +44,29 @@ int main(int argc, char** argv)
             spdlog::set_level(spdlog::level::debug);
 
         const auto serverAddr = ipStrToNum(serverAddrStr);
+        std::for_each(protocol.begin(), protocol.end(), [](auto& ch){ ch = std::tolower(ch); });
+
+        if ("udp" == protocol)
+        {
+            // TODO: udp socket
+        }
+        else if ("tcp" == protocol)
+        {
+            // TODO: tcp socket
+        }
+        else
+        {
+            throw std::invalid_argument("Wrong protocol value");
+        }
     }
     catch (const bpo::error& ex)
     {
         SPDLOG_ERROR("Command line args error: {}", ex.what());
+        return 1;
+    }
+    catch (const std::invalid_argument& ex)
+    {
+        SPDLOG_ERROR("Failed to validate input params: {}", ex.what());
         return 1;
     }
     catch (const std::exception& ex)
